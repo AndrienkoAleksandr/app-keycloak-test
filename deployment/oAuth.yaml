@@ -1,0 +1,11 @@
+apiVersion: oauth.openshift.io/v1
+grantMethod: prompt
+kind: OAuthClient
+metadata:
+  labels:
+    app: js-adapter
+  name: js-adapter-identity-provider
+redirectURIs:
+- https://keycloak-test2.apps-crc.testing/auth/realms/demorealm/broker/openshift-v4/endpoint
+- http://keycloak-test2.apps-crc.testing/auth/realms/demorealm/broker/openshift-v4/endpoint
+secret: BraveBRxZDG3

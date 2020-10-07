@@ -1,0 +1,72 @@
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: js-adapter
+    labels:
+      app: js-adapter
+    namespace: default
+  spec:
+    ports:
+    # - name: http
+      - port: 8080
+        targetPort: 8080
+    selector:
+      app: js-adapter
+# ---
+#   apiVersion: route.openshift.io/v1
+#   kind: Route
+#   metadata:
+#     annotations:
+#       description: Route for application's http service.
+#     labels:
+#       app: js-adapter
+#     name: js-adapter
+#     namespace: default
+#   spec:
+#     host: js-adapter-default.apps-crc.testing
+#     tls:
+#       termination: passthrough
+#     port:
+#       targetPort: http
+#     to:
+#       kind: Service
+#       name: js-adapter
+#       weight: 100
+#     wildcardPolicy: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: js-adapter
+  namespace: default
+  labels:
+    app: js-adapter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: js-adapter
+  template:
+    metadata:
+      labels:
+        app: js-adapter
+    spec:
+      containers:
+        - name: js-adapter
+          image: docker.io/aandrienko/keyloack-js-adapters:latest
+          imagePullPolicy: Always
+          ports:
+            # - name: http
+            - containerPort: 8080
+              protocol: TCP
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+            # InitialDelaySeconds: 25
+            # FailureThreshold:    10
+            # TimeoutSeconds:      5
+            # PeriodSeconds:       10
+            # SuccessThreshold:    1  
+
