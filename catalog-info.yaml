@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: app-keycloak-test
+  annotations:
+    github.com/project-slug: AndrienkoAleksandr/app-keycloak-test
+spec:
+  type: other
+  owner: AndrienkoAleksandr
+  lifecycle: unknown
